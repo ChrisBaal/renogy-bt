@@ -20,6 +20,8 @@ def on_data_received(client, data):
         data_logger.log_remote(json_data=filtered_data)
     if config['mqtt'].getboolean('enabled'):
         data_logger.log_mqtt(json_data=filtered_data)
+    if config['node_exporter'].getboolean('enabled'):
+        print("node_exporter enabled")
     if config['pvoutput'].getboolean('enabled') and config['device']['type'] == 'RNG_CTRL':
         data_logger.log_pvoutput(json_data=filtered_data)
     if not config['data'].getboolean('enable_polling'):
